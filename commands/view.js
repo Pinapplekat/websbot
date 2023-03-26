@@ -3,27 +3,10 @@ var http = require("http");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("type")
-    .setDescription("Send text to the browser")
-
-    .addStringOption((option) =>
-      option.setName("text").setDescription("TEXT")
-    ),
+    .setName("view")
+    .setDescription("View the screen"),
   async execute(interaction) {
-    var text = interaction.options.getString("text");
-    console.log(text)
-    if (!text) {
-      return await interaction.reply({
-        content: `Text is required`,
-        ephemeral: true,
-      });
-    }
-    const msg = await interaction.reply({
-      content: "Getting URL",
-      ephemeral: true
-    })
-    text = text.replaceAll("/", "%2F")
-    var url = "http://192.168.4.51:3000/type.jpg?text="+text
+    var url = "http://192.168.4.51:3000/screenshot.jpg"
     const row = new ActionRowBuilder()
 			.addComponents(
 				new ButtonBuilder()
@@ -47,9 +30,10 @@ module.exports = {
 					.setLabel('Refresh Screenshot')
           .setStyle(ButtonStyle.Primary)
 			);
-    interaction.editReply({
+    interaction.reply({
       files: [url],
-      components: [row] 
+      components: [row],
+      ephemeral: true
     })
     
   },

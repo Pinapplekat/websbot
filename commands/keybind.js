@@ -3,30 +3,38 @@ var http = require("http");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("type")
-    .setDescription("Send text to the browser")
-
+    .setName("keybind")
+    .setDescription("Send keybind to the browser")
+    .addBooleanOption(option =>
+      option.setName('shift')
+      .setDescription('SHIFT')
+    )
+    .addBooleanOption(option =>
+      option.setName('control')
+      .setDescription('CTRL')
+    )
     .addStringOption((option) =>
-      option.setName("text").setDescription("TEXT")
+      option.setName("key")
+      .setDescription("key")
     ),
   async execute(interaction) {
-    var text = interaction.options.getString("text");
-    console.log(text)
-    if (!text) {
+    var key = interaction.options.getString("key");
+    var shift = interaction.options.getBoolean("shift");
+    var control = interaction.options.getBoolean("control");
+    if (!key) {
       return await interaction.reply({
-        content: `Text is required`,
+        content: `Key is required`,
         ephemeral: true,
       });
     }
     const msg = await interaction.reply({
-      content: "Getting URL",
+      content: "Getting Page",
       ephemeral: true
     })
-    text = text.replaceAll("/", "%2F")
-    var url = "http://192.168.4.51:3000/type.jpg?text="+text
+    var url = `http://192.168.4.51:3000/keybind.jpg?key=${key}&shift=${shift}&control=${control}`
     const row = new ActionRowBuilder()
-			.addComponents(
-				new ButtonBuilder()
+      .addComponents(
+        new ButtonBuilder()
 					.setCustomId('key:Escape')
 					.setLabel('ESC')
           .setStyle(ButtonStyle.Secondary),
@@ -46,11 +54,11 @@ module.exports = {
 					.setCustomId('func:screenshot')
 					.setLabel('Refresh Screenshot')
           .setStyle(ButtonStyle.Primary)
-			);
+      );
     interaction.editReply({
       files: [url],
-      components: [row] 
+      components: [row]
     })
-    
+
   },
 };

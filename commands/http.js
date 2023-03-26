@@ -27,6 +27,10 @@ module.exports = {
     const row = new ActionRowBuilder()
 			.addComponents(
 				new ButtonBuilder()
+					.setCustomId('key:Escape')
+					.setLabel('ESC')
+          .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder()
 					.setCustomId('key:Tab')
 					.setLabel('TAB')
           .setStyle(ButtonStyle.Secondary),
@@ -34,6 +38,10 @@ module.exports = {
 					.setCustomId('key:Enter')
 					.setLabel('ENTER')
           .setStyle(ButtonStyle.Success),
+        new ButtonBuilder()
+					.setCustomId('key:Backspace')
+					.setLabel('BACKSPACE')
+          .setStyle(ButtonStyle.Danger),
         new ButtonBuilder()
 					.setCustomId('func:screenshot')
 					.setLabel('Refresh Screenshot')
