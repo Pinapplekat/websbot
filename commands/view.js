@@ -33,7 +33,6 @@ module.exports = {
     interaction.reply({
       files: [url],
       components: [row],
-      ephemeral: true
     })
     
   },

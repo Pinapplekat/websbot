@@ -20,7 +20,6 @@ module.exports = {
     }
     const msg = await interaction.reply({
       content: "Getting URL",
-      ephemeral: true
     })
     text = text.replaceAll("/", "%2F")
     var url = "http://192.168.4.51:3000/type.jpg?text="+text

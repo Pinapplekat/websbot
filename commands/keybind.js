@@ -29,7 +29,6 @@ module.exports = {
     }
     const msg = await interaction.reply({
       content: "Getting Page",
-      ephemeral: true
     })
     var url = `http://192.168.4.51:3000/keybind.jpg?key=${key}&shift=${shift}&control=${control}`
     const row = new ActionRowBuilder()
